@@ -40,6 +40,7 @@ export default function Orders() {
       }
   
       return {
+        id: item.id,
         productId: parseInt(item.product_id, 10),
         productName: item.product_name,
         quantity: parseInt(item.quantity, 10),

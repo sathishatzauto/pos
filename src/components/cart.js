@@ -132,6 +132,11 @@ function Cart() {
   const handlePopupOpen = () => {
     setIsPromoPopupVisible(true);
   };
+
+
+  const handleUpdateCart = (cart) => {
+  return cart.map((product) => product?.id ? product : {...product, id: 0});
+} 
   const handlePopupClose = () => {
     setIsPromoPopupVisible(false);
   };
@@ -212,6 +217,7 @@ function Cart() {
       else{
         const Name = localStorage.getItem("fullName") || fullName;
         const Number = localStorage.getItem("phoneNumber") || phoneNumber;
+        console.log("Cart",handleUpdateCart(cartList))
         
         console.log("Name and phone",Name,Number)
         localStorage.setItem("fullName", Name)
@@ -222,7 +228,7 @@ function Cart() {
           {
             name: Name,
             mobile: Number,
-            products: cartList,
+            products: handleUpdateCart(cartList),
             table_id: localStorage.getItem("table") || null,
             order_note: orderNote,
             order_type: orderType,
@@ -243,8 +249,8 @@ function Cart() {
             );
             localStorage.setItem("cartList", JSON.stringify([]));
             localStorage.setItem("quantities", JSON.stringify([]));
-            localStorage.setItem("order", JSON.stringify([]));
-            navigate("/order");
+            localStorage.removeItem("order");           
+             navigate("/order");
           } else {
             toast.error(response.data.message);
           }
