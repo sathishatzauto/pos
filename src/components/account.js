@@ -19,7 +19,9 @@ function Account() {
   const handleLogout = () => {
     localStorage.removeItem("authToken");
     sessionStorage.clear();
+    const table=localStorage.getItem("table")
     localStorage.clear();
+    localStorage.setItem("table",table)
     navigate('/')
   };
 
