@@ -397,6 +397,12 @@ function App() {
     localStorage.setItem("quantities", JSON.stringify(quantities));
   }, [quantities]);
 
+  // useEffect(() => {
+   
+  //   localStorage.clear("order_details")
+  //   localStorage.clear("order")
+  // }, []);
+
   useEffect(() => {
     if (id) {
       localStorage.setItem("table", id);
