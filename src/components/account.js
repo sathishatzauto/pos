@@ -36,8 +36,8 @@ function Account() {
       <section className="mt-24 container mx-auto px-4 h-screen">
         <div className="mt-6">
           <div className="flex mx-auto justify-center">
-            <img src={profile} alt="profile" className="rounded-full w-20" />
-          </div>
+            <i className="las la-user text-5xl text-gray-600"></i>         
+           </div>
           <h2 className="text-center text-black font-semibold text-xl pt-1">
             {selectedFullName}
           </h2>

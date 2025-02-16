@@ -62,10 +62,46 @@ export default function Orders() {
     return <div>Loading Order...</div>;
   }
 
+  // Function to calculate correct subtotal, VAT, and total
+function calculateOrderTotals(orderItems) {
+  let subtotal = 0;
+  let totalVAT = 0;
+  let totalAmount = 0;
+
+  orderItems.forEach(item => {
+      let sellingPrice = parseFloat(item.product_price); // Price including VAT
+      let vatRate = parseFloat(item.product.tax_rate) || 0; // VAT Rate
+
+      // Calculate pre-tax price
+      let vatAmount = vatRate > 0 ? sellingPrice / 100 * vatRate : 0;
+
+      // Calculate VAT amount
+      let preTaxPrice = sellingPrice - vatAmount;
+
+      // Add to totals
+      subtotal += preTaxPrice;
+      totalVAT += vatAmount;
+      totalAmount += sellingPrice;
+  });
+
+  // Round values to 2 decimal places for precision
+  subtotal = parseFloat(subtotal.toFixed(2));
+  totalVAT = parseFloat(totalVAT.toFixed(2));
+  totalAmount = parseFloat(totalAmount.toFixed(2));
+
+  // Return the formatted data
+  return {
+      subtotal: subtotal,
+      vat: totalVAT,
+      total: totalAmount
+  };
+}
+// Run calculation
+const orderTotals = calculateOrderTotals(products);
   // Parse totals from the order
-  const subTotal = parseFloat(order.subtotal_amount) || 0;
-  const vat = parseFloat(order.total_vat) || 0;
-  const totalAmount = parseFloat(order.total_amount) || 0;
+  const subTotal = parseFloat(orderTotals.subtotal) || 0;
+  const vat = parseFloat(orderTotals.vat) || 0;
+  const totalAmount = parseFloat(orderTotals.total) || 0;
 
   return (
     <section className="pt-3 bg-gray-50">

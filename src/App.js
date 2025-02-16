@@ -202,6 +202,7 @@ function App() {
             productId: productId,
             productName: items.find((item) => item.id === productId)?.name,
             quantity: 1,
+            tax_rate:items.find((item) => item.id === productId)?.tax_rate,
             addOns: [], // Skipping add-ons
             characters: selectedCharacters,
             variation: selectedVariation,
@@ -266,6 +267,7 @@ function App() {
             productName: items.filter((item) => item.id === productId)[0].name,
             quantity: 1,
             addOns: selectedAddons,
+            tax_rate:items.find((item) => item.id === productId)?.tax_rate,
             characters: selectedCharacters,
             variation: selectedVariation,
           },

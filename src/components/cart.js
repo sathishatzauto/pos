@@ -249,8 +249,8 @@ function Cart() {
             );
             localStorage.setItem("cartList", JSON.stringify([]));
             localStorage.setItem("quantities", JSON.stringify([]));
-            localStorage.removeItem("order");           
-             navigate("/order");
+            localStorage.removeItem("order");
+            navigate("/order");
           } else {
             toast.error(response.data.message);
           }
