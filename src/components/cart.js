@@ -153,15 +153,15 @@ function Cart() {
   };
 
   const handleLogin = async (alreadyLogin) => {
+    debugger;
     if(!alreadyLogin)
     {
       
       if (fullName.trim().length === 0) {
         toast.error("Enter Full Name");
-        return
+        
       } else if (phoneNumber.trim().length === 0) {
         toast.error("Enter Phone Number");
-        return
       }
       localStorage.setItem("fullName", fullName);
       localStorage.setItem("phoneNumber", phoneNumber);
@@ -169,13 +169,19 @@ function Cart() {
      else {
       if(!localStorage.getItem('order'))
       {
-        const fullName=  localStorage.getItem("fullName");
-        const phoneNumber=localStorage.getItem("phoneNumber");
+        const Name = localStorage.getItem("fullName") || fullName;
+        const Number = localStorage.getItem("phoneNumber") || phoneNumber;
+        
+        
+        console.log("State Name and phone",Name ,Number)
+        console.log("local Name and phone",localStorage.getItem("fullName") ,localStorage.getItem("phoneNumber"))
+        localStorage.setItem("fullName", Name)
+        localStorage.setItem("phoneNumber", Number)
         let response = await axios.post(
           `https://api.rcpos.co.za/api/table/order`,
           {
-            name: fullName,
-            mobile: phoneNumber,
+            name: Name,
+            mobile: Number,
             products: cartList,
             table_id: localStorage.getItem("table") || null,
             order_note: orderNote,
@@ -204,14 +210,18 @@ function Cart() {
         }
       }
       else{
-       const fullName=  localStorage.getItem("fullName");
-        const phoneNumber=localStorage.getItem("phoneNumber");
+        const Name = localStorage.getItem("fullName") || fullName;
+        const Number = localStorage.getItem("phoneNumber") || phoneNumber;
+        
+        console.log("Name and phone",Name,Number)
+        localStorage.setItem("fullName", Name)
+        localStorage.setItem("phoneNumber", Number)
         const order=JSON.parse(localStorage.getItem('order'))
         let response = await axios.post(
           `https://api.rcpos.co.za/api/table/order/${order.id}`,
           {
-            name: fullName,
-            mobile: phoneNumber,
+            name: Name,
+            mobile: Number,
             products: cartList,
             table_id: localStorage.getItem("table") || null,
             order_note: orderNote,
@@ -284,6 +294,12 @@ function Cart() {
       localStorage.setItem('cartList', JSON.stringify(cartList));
     }
   },[cartList])
+
+  
+  useEffect(() => {
+    console.log("Name",fullName)
+    console.log("Phone", phoneNumber)
+  },[fullName,phoneNumber,cartList])
 
   const handleCookingPopupOpen = () => {
     setIsPopuppVisible(true);

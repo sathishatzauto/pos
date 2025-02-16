@@ -48,7 +48,7 @@ function Account() {
           <a href="/orders">
             <div
               className="flex border-b border-t border-neutral-100 items-center py-3 cursor-pointer"
-              onClick={handleLogout}
+              // onClick={handleLogout}
             >
               <div className="w-10/12">
 
