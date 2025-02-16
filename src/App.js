@@ -576,7 +576,7 @@ function App() {
               </div>
               <div className="w-5/12">
               <img
-  src={`https://api.rcpos.co.za/uploads/${item.image}`}
+  src={`https://admin.rcpos.co.za/uploads/${item.image}`}
   alt=""
   className="rounded-full w-32 h-32 flex mx-auto justify-center items-center"
   onError={(e) => (e.target.src = food)}

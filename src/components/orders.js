@@ -118,7 +118,7 @@ export default function Orders() {
                     <img
                       src={
                         item.product?.image
-                          ? `https://posadmin.leadfutureai.com/uploads/${item.product.image}`
+                          ? `https://admin.rcpos.co.za/uploads/${item.product.image}`
                           : foodPlaceholder
                       }
                       alt={item.product_name}
